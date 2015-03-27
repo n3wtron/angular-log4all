@@ -43,7 +43,7 @@ log4allService.service('Log4AllService', ['$http', '$q', function ($http, $q) {
             $http.post(getApiUrl('logs/search'), searchParams).success(function (data) {
                 if (!data.success) {
                     searchDeferred.resolve({
-                        success: true,
+                        success: false,
                         errorMessage: data.message
                     });
                 } else {
@@ -58,7 +58,7 @@ log4allService.service('Log4AllService', ['$http', '$q', function ($http, $q) {
                         resultTags.push(tag);
                     });
                     searchDeferred.resolve({
-                        success: false,
+                        success: true,
                         logs: data.result,
                         tags: resultTags
                     });
