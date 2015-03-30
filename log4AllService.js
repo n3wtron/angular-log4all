@@ -39,6 +39,7 @@ log4allService.service('Log4AllService', ['$http', '$q', function ($http, $q) {
                 sort_field: sortColumn,
                 sort_ascending: ascending
             };
+            
             var searchDeferred = $q.defer();
             $http.post(getApiUrl('logs/search'), searchParams).success(function (data) {
                 if (!data.success) {
@@ -65,6 +66,35 @@ log4allService.service('Log4AllService', ['$http', '$q', function ($http, $q) {
                 }
             });
             return searchDeferred.promise;
+        },
+        tailLog: function (applications,levels, dtSince, dtTo, query,  maxResult, sortColumn, ascending) {
+
+            var searchParams = {
+                applications: applications,
+                levels:levels,
+                dt_since: dtSince,
+                dt_to: dtTo,
+                query: query,
+                max_result : maxResult,
+                sort_field: sortColumn,
+                sort_ascending: ascending
+            };
+            
+            var tailDeferred = $q.defer();
+            $http.post(getApiUrl('logs/tail'), searchParams).success(function (data) {
+                if (!data.success) {
+                    tailDeferred.resolve({
+                        success: false,
+                        errorMessage: data.message
+                    });
+                } else {
+                    tailDeferred.resolve({
+                        success: true,
+                        logs: data.result,
+                    });
+                }
+            });
+            return tailDeferred.promise;
         }
     }
 }]);
