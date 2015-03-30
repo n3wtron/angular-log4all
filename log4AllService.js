@@ -67,17 +67,14 @@ log4allService.service('Log4AllService', ['$http', '$q', function ($http, $q) {
             });
             return searchDeferred.promise;
         },
-        tailLog: function (applications,levels, dtSince, dtTo, query,  maxResult, sortColumn, ascending) {
+        tailLog: function (applications,levels, dtSince, dtTo, query) {
 
             var searchParams = {
                 applications: applications,
                 levels:levels,
                 dt_since: dtSince,
                 dt_to: dtTo,
-                query: query,
-                max_result : maxResult,
-                sort_field: sortColumn,
-                sort_ascending: ascending
+                query: query
             };
             
             var tailDeferred = $q.defer();
