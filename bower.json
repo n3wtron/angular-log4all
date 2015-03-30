@@ -4,7 +4,7 @@
   "authors": [
     "Igor Maculan <n3wtron@gmail.com>"
   ],
-  "private": true,
+  "private": false,
   "description": "angularjs log4all module",
   "main": "log4all.js",
   "keywords": [
