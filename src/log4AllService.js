@@ -14,12 +14,12 @@ log4allService.service('Log4AllService', ['$http', '$q', function ($http, $q) {
             $http.put(getApiUrl('log'), log).success(function (data) {
                 if (!data.success) {
                     addLogDeferred.resolve({
-                        success: true,
+                        success: false,
                         errorMessage: data.message
                     });
                 } else {
                     addLogDeferred.resolve({
-                        success: false,
+                        success: true,
                         errorMessage: null
                     });
                 }
