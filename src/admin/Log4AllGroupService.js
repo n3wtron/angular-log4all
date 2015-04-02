@@ -1,7 +1,8 @@
 /**
  * Created by igor on 3/11/15.
  */
-log4AllAdminServiceModule.service('log4AllGroupService', ['$http', '$q', function ($http, $q) {
+
+function log4AllGroupService($http, $q) {
 
     var getAll = function () {
         var deferedResult = $q.defer();
@@ -57,4 +58,6 @@ log4AllAdminServiceModule.service('log4AllGroupService', ['$http', '$q', functio
         'update': update
     }
 
-}]);
+}
+
+log4AllAdminServiceModule.service('log4AllGroupService', ['$http', '$q', log4AllGroupService]);

@@ -4,15 +4,17 @@
 var log4AllAdminServiceModule = angular.module('Log4AllAdminServiceModule', ['angular-jwt', 'LocalStorageModule']);
 
 log4AllAdminServiceModule.config(function ($httpProvider, jwtInterceptorProvider) {
-    jwtInterceptorProvider.tokenGetter = ['localStorageService', function (localStorageService) {
+	function localStorageService(localStorageService) {
         return localStorageService.get('jwt_token');
-    }];
+    }
+
+    jwtInterceptorProvider.tokenGetter = ['localStorageService', localStorageService];
     $httpProvider.interceptors.push('jwtInterceptor');
 });
 /**
  * Created by igor on 3/11/15.
  */
-log4AllAdminServiceModule.service('log4AllApplicationService', ['$http', '$q', function ($http, $q) {
+function log4AllApplicationService($http, $q) {
 
     var getAll = function () {
         var deferedResult = $q.defer();
@@ -68,11 +70,13 @@ log4AllAdminServiceModule.service('log4AllApplicationService', ['$http', '$q', f
         'update': update
     }
 
-}]);
+}
+
+log4AllAdminServiceModule.service('log4AllApplicationService', ['$http', '$q', log4AllApplicationService]);
 /**
  * Created by igor on 3/12/15.
  */
-log4AllAdminServiceModule.service('log4AllAuthService', ['$http', '$q', function ($http, $q) {
+ function log4AllAuthService($http, $q) {
     var login = function (userAuth) {
         var deferedResponse = $q.defer();
         $http.post('/api/auth/login', userAuth).success(function (data) {
@@ -96,11 +100,13 @@ log4AllAdminServiceModule.service('log4AllAuthService', ['$http', '$q', function
         'login':login,
         'getPermissions':getPermissions
     }
-}]);
+}
+log4AllAdminServiceModule.service('log4AllAuthService', ['$http', '$q', log4AllAuthService]);
 /**
  * Created by igor on 3/11/15.
  */
-log4AllAdminServiceModule.service('log4AllGroupService', ['$http', '$q', function ($http, $q) {
+
+function log4AllGroupService($http, $q) {
 
     var getAll = function () {
         var deferedResult = $q.defer();
@@ -156,11 +162,14 @@ log4AllAdminServiceModule.service('log4AllGroupService', ['$http', '$q', functio
         'update': update
     }
 
-}]);
+}
+
+log4AllAdminServiceModule.service('log4AllGroupService', ['$http', '$q', log4AllGroupService]);
 /**
  * Created by igor on 3/11/15.
  */
-log4AllAdminServiceModule.service('log4AllUserService', ['$http', '$q', function ($http, $q) {
+
+function log4AllUserService($http, $q) {
 
     var getAll = function () {
         var deferedResult = $q.defer();
@@ -216,4 +225,6 @@ log4AllAdminServiceModule.service('log4AllUserService', ['$http', '$q', function
         'update': update
     }
 
-}]);
+}
+ 
+log4AllAdminServiceModule.service('log4AllUserService', ['$http', '$q', log4AllUserService]);

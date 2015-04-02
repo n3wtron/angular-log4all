@@ -1,7 +1,7 @@
 /**
  * Created by igor on 3/12/15.
  */
-log4AllAdminServiceModule.service('log4AllAuthService', ['$http', '$q', function ($http, $q) {
+ function log4AllAuthService($http, $q) {
     var login = function (userAuth) {
         var deferedResponse = $q.defer();
         $http.post('/api/auth/login', userAuth).success(function (data) {
@@ -25,4 +25,5 @@ log4AllAdminServiceModule.service('log4AllAuthService', ['$http', '$q', function
         'login':login,
         'getPermissions':getPermissions
     }
-}]);
+}
+log4AllAdminServiceModule.service('log4AllAuthService', ['$http', '$q', log4AllAuthService]);

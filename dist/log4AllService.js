@@ -7,19 +7,19 @@ function getApiUrl(apiUrl) {
     return log4AllURL + "/api/" + apiUrl;
 }
 
-log4allService.service('Log4AllService', ['$http', '$q', function ($http, $q) {
+function Log4AllService($http, $q) {
     return {
         addLog: function (log) {
             var addLogDeferred = $q.defer();
             $http.put(getApiUrl('log'), log).success(function (data) {
                 if (!data.success) {
                     addLogDeferred.resolve({
-                        success: true,
+                        success: false,
                         errorMessage: data.message
                     });
                 } else {
                     addLogDeferred.resolve({
-                        success: false,
+                        success: true,
                         errorMessage: null
                     });
                 }
@@ -94,4 +94,6 @@ log4allService.service('Log4AllService', ['$http', '$q', function ($http, $q) {
             return tailDeferred.promise;
         }
     }
-}]);
+}
+
+log4allService.service('Log4AllService', ['$http', '$q', Log4AllService]);

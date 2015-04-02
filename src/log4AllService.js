@@ -7,7 +7,7 @@ function getApiUrl(apiUrl) {
     return log4AllURL + "/api/" + apiUrl;
 }
 
-log4allService.service('Log4AllService', ['$http', '$q', function ($http, $q) {
+function Log4AllService($http, $q) {
     return {
         addLog: function (log) {
             var addLogDeferred = $q.defer();
@@ -94,4 +94,6 @@ log4allService.service('Log4AllService', ['$http', '$q', function ($http, $q) {
             return tailDeferred.promise;
         }
     }
-}]);
+}
+
+log4allService.service('Log4AllService', ['$http', '$q', Log4AllService]);

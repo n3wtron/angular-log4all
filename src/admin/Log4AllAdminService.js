@@ -4,8 +4,10 @@
 var log4AllAdminServiceModule = angular.module('Log4AllAdminServiceModule', ['angular-jwt', 'LocalStorageModule']);
 
 log4AllAdminServiceModule.config(function ($httpProvider, jwtInterceptorProvider) {
-    jwtInterceptorProvider.tokenGetter = ['localStorageService', function (localStorageService) {
+	function localStorageService(localStorageService) {
         return localStorageService.get('jwt_token');
-    }];
+    }
+
+    jwtInterceptorProvider.tokenGetter = ['localStorageService', localStorageService];
     $httpProvider.interceptors.push('jwtInterceptor');
 });
