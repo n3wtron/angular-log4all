@@ -14,7 +14,9 @@ gulp.task('make', function() {
 		'src/admin/Log4AllApplicationService.js',
 		'src/admin/Log4AllAuthService.js',
 		'src/admin/Log4AllGroupService.js',
-		'src/admin/Log4AllUserService.js'])
+		'src/admin/Log4AllUserService.js',
+		'src/admin/Log4AllIndexesService.js'
+		])
 		.pipe(concat('log4AllAdminService.js'))
 		.pipe(gulp.dest('./dist'))
 		.pipe(uglify({mangle: false}))
