@@ -2,6 +2,8 @@ var gulp = require('gulp');
 var concat = require('gulp-concat')
 var rename = require('gulp-rename');
 var uglify = require('gulp-uglify');
+var watch = require('gulp-watch');
+var batch = require('gulp-batch');
 var del = require('del');
 
 gulp.task('clean', function() {
@@ -32,3 +34,8 @@ gulp.task('make', function() {
 
 gulp.task('default', ['clean','make']);
 
+gulp.task('watch', function() {
+    watch('src/**/*.js', batch(function (event, done) {
+        gulp.start('make', done);
+		}));
+});
